@@ -19,11 +19,6 @@ app.get('/', (req, res) => {
     res.send('Transcoder service is working')
 })
 
-app.get('/transcode', (req, res) => {
-    s3ToS3();
-    //convertToHLS();
-    res.send('Transcoding done');
-})
 
 const kafkaconfig = new KafkaConfig()
 kafkaconfig.consume("transcode", (value) => {
