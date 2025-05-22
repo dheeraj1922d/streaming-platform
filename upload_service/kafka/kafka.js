@@ -11,8 +11,8 @@ class KafkaConfig {
                ca: [fs.readFileSync(path.resolve("./ca.pem"), "utf-8")]
            },
            sasl: {
-               username: "avnadmin",
-               password: "<pwd>",
+               username: process.env.KAFKA_USERNAME,
+               password: process.env.KAFKA_PASSWORD,
                mechanism: "plain"
            }
        })
