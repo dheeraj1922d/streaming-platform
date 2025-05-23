@@ -24,7 +24,8 @@ const UploadForm = () => {
     }
 
     try {
-      ////////////////////////////////////////////////////
+
+      //initialize uloading 
       const formData = new FormData();
       formData.append('filename', selectedFile.name);
       const initializeRes = await axios.post('http://localhost:8080/upload/initialize', formData, {
@@ -36,8 +37,8 @@ const UploadForm = () => {
       const { uploadId } = initializeRes.data;
       console.log('Upload id is ', uploadId);
 
-      ////////////////////////////////////////////////////
-
+      
+      //prepare chunks push to backend for upload
       const chunkSize = 5 * 1024 * 1024; // 5 MB chunks
       const totalChunks = Math.ceil(selectedFile.size / chunkSize);
 
@@ -65,7 +66,7 @@ const UploadForm = () => {
 
       await Promise.all(uploadPromises);
 
-      ////////////////////////////////////////////////////
+      //complete upload
 
 
       const completeRes = await axios.post('http://localhost:8080/upload/complete', {
