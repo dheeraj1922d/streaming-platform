@@ -1,5 +1,5 @@
 import express from "express"
-import uploadRouter from "./routes/upload.route.js"
+import uploadRouter from "./routers/upload.route.js"
 import cors from "cors"
 import dotenv from "dotenv"
 import kafkaPublisherRouter from "./routes/kafkapublisher.route.js"
