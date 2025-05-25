@@ -111,7 +111,11 @@ export const completeUpload = async (req, res) => {
 
     console.log("data----- ", uploadResult);
 
-    pushVideoForEncodingToKafka(title, uploadResult.Location);
+    const url = uploadResult.Location;
+    console.log("Video uploaded at ", url);
+
+    pushVideoForEncodingToKafka(title, url);
+    await addVideoDetailsToDB(title, description, author, url);
     return res.status(200).json({ message: "Uploaded successfully!!!" });
   } catch (error) {
     console.log("Error completing upload :", error);
