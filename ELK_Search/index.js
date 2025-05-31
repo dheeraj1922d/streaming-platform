@@ -28,9 +28,9 @@ app.post("/upload", async (req, res) => {
     const { title, description, author, videoUrl } = req.body;
 
     var host =
-      "https://name:pwd@search-trial-jqtlus4ksz5xo3aqihkpv3pxny.ap-south-1.es.amazonaws.com";
+      "";
     var host_aiven =
-      "https://avnadmin:AVNS_UMMkaitfbQNdADAuKCP@os-34fffb3e-streaming-x.b.aivencloud.com:26849";
+      "";
 
 
     var client = new Client({
