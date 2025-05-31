@@ -151,7 +151,7 @@ const s3ToS3 = async (mp4FileName, title, description, author) => {
       title,
       description,
       author,
-      url: `${hlsFolder}/${masterPlaylistFileName}`, // relative path
+      url: `${masterPlaylistFileName}`, // relative path
     });
 
     console.log("Metadata successfully added to DB");

@@ -12,6 +12,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@aws-sdk/cloudfront-signer": "^3.821.0",
     "@prisma/client": "^5.13.0",
     "aws-sdk": "^2.1612.0",
     "axios": "^1.9.0",

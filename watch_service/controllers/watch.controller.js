@@ -1,41 +1,28 @@
-import AWS from "aws-sdk"
+import path from 'path'; // Still useful if you need path manipulation for videoKey, though not strictly for this version.
 
-async function generateSignedUrl(videoKey) {
 
-   const s3 = new AWS.S3({
-       accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-       secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-       region: 'ap-south-1'
-   });
-
-   const params = {
-       Bucket: process.env.AWS_BUCKET,
-       Key: videoKey,
-       Expires: 3600 // URL expires in 1 hour, adjust as needed
-   };
-
-   return new Promise((resolve, reject) => {
-       s3.getSignedUrl('getObject', params, (err, url) => {
-           if (err) {
-               reject(err);
-           } else {
-               resolve(url);
-           }
-       });
-   });
-}
-
+// Your modified watchVideo controller for public CloudFront content
 const watchVideo = async (req, res) => {
-   try {
-       const videoKey = req.query.key; // Key of the video file in S3
-       console.log('video key is ', videoKey);
-       const signedUrl = await generateSignedUrl(videoKey);
-       res.json({ signedUrl });
-       console.log(signedUrl);
-   } catch (err) {
-       console.error('Error generating pre-signed URL:', err);
-       res.status(500).json({ error: 'Internal Server Error' });
-   }
-}
+    try {
+        // Ensure CLOUDFRONT_DOMAIN is available.
+        if (!process.env.CLOUDFRONT_DOMAIN) {
+            throw new Error("CLOUDFRONT_DOMAIN environment variable is not set. Cannot construct public URL.");
+        }
+
+        const videoKey = req.query.key; 
+        console.log('Requested video key for CloudFront:', videoKey);
+
+        const cloudFrontUrl = `https://${process.env.CLOUDFRONT_DOMAIN}/${videoKey}`;
+        
+        console.log('Constructed Public CloudFront URL:', cloudFrontUrl);
+
+        // Send the direct CloudFront URL to the client.
+        res.json({ videoUrl: cloudFrontUrl }); 
+
+    } catch (err) {
+        console.error('Error in watchVideo constructing CloudFront URL:', err.message);
+        res.status(500).json({ error: 'Internal Server Error', details: err.message });
+    }
+};
 
 export default watchVideo;

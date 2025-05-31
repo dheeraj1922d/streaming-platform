@@ -37,8 +37,8 @@ const YouTubeHome = () => {
         `http://localhost:8082/watch?key=${encodeURIComponent(video.url)}`
       );
 
-      console.log("watch service res : " , res);
-      setSignedUrl(res.data.signedUrl);
+      setSignedUrl(res.data.videoUrl);
+      console.log("Signed URL:", res.data.videoUrl);
     } catch (error) {
       console.error("Error fetching signed URL:", error);
       setSignedUrl(null);
