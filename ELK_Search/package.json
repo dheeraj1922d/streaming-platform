@@ -1,0 +1,20 @@
+{
+  "dependencies": {
+    "@opensearch-project/opensearch": "^3.5.1",
+    "express": "^5.1.0",
+    "node": "^22.16.0",
+    "nodemon": "^3.1.10"
+  },
+  "name": "elk_search",
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {},
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}

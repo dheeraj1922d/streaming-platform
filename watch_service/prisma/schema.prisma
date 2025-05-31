@@ -6,7 +6,6 @@
 
 generator client {
   provider = "prisma-client-js"
-  output   = "../generated/prisma"
 }
 
 datasource db {
@@ -21,4 +20,3 @@ model VideoData {
   author      String
   url         String
 }
-

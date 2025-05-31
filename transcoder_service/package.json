@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "devstart": "nodemon index.js"
+    "dev": "nodemon index.js"
   },
   "keywords": [],
   "author": "",
@@ -20,5 +20,9 @@
     "fluent-ffmpeg": "^2.1.2",
     "kafkajs": "^2.2.4",
     "nodemon": "^3.1.0"
+  },
+  "devDependencies": {
+    "@prisma/client": "^5.13.0",
+    "prisma": "^5.13.0"
   }
 }

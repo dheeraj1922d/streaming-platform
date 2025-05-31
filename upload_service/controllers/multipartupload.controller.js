@@ -1,5 +1,4 @@
 import AWS from "aws-sdk";
-import { addVideoDetailsToDB } from "../db/db.js";
 import { pushVideoForEncodingToKafka } from "./kafkapublisher.controller.js";
 
 // Initialize upload
@@ -114,8 +113,8 @@ export const completeUpload = async (req, res) => {
     const url = uploadResult.Location;
     console.log("Video uploaded at ", url);
 
-    pushVideoForEncodingToKafka(title, url);
-    await addVideoDetailsToDB(title, description, author, url);
+    pushVideoForEncodingToKafka( filename, title, description, author );
+    // await addVideoDetailsToDB(title, description, author, url);
     return res.status(200).json({ message: "Uploaded successfully!!!" });
   } catch (error) {
     console.log("Error completing upload :", error);
@@ -123,19 +122,19 @@ export const completeUpload = async (req, res) => {
   }
 };
 
-export const uploadToDb = async (req, res) => {
-  console.log("Adding details to DB");
-  try {
-    const videoDetails = req.body;
-    await addVideoDetailsToDB(
-      videoDetails.title,
-      videoDetails.description,
-      videoDetails.author,
-      videoDetails.url
-    );
-    return res.status(200).send("success");
-  } catch (error) {
-    console.log("Error in adding to DB ", error);
-    return res.status(400).send(error);
-  }
-};
+// export const uploadToDb = async (req, res) => {
+//   console.log("Adding details to DB");
+//   try {
+//     const videoDetails = req.body;
+//     await addVideoDetailsToDB(
+//       videoDetails.title,
+//       videoDetails.description,
+//       videoDetails.author,
+//       videoDetails.url
+//     );
+//     return res.status(200).send("success");
+//   } catch (error) {
+//     console.log("Error in adding to DB ", error);
+//     return res.status(400).send(error);
+//   }
+// };

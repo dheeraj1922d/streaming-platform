@@ -1,31 +1,43 @@
-"use client";
-import React, { useRef, useEffect } from "react";
-import Hls from "hls.js";
-const VideoPlayer = () => {
+import { useEffect, useRef } from 'react';
+import Hls from 'hls.js';
+import Plyr from 'plyr';
+import 'plyr/dist/plyr.css';
+
+export default function VideoPlayer({ src }) {
   const videoRef = useRef(null);
-  const src =
-    "https://hhld-classes.s3.ap-south-1.amazonaws.com/output/test_mp4_master.m3u8";
+
+  console.log("signedUrl : ", src);
   useEffect(() => {
     const video = videoRef.current;
+    if (!video) return;
 
-    if (Hls.isSupported()) {
-      console.log("HLS is supported");
-      console.log(src);
+    video.controls = true;
+    const defaultOptions = {};
+    if (video.canPlayType('application/vnd.apple.mpegurl')) {
+      // This will run in safari, where HLS is supported natively
+      video.src = src;
+    } else if (Hls.isSupported()) {
+      // This will run in all other modern browsers
 
       const hls = new Hls();
-
-      hls.attachMedia(video);
       hls.loadSource(src);
-      
-      hls.on(Hls.Events.MANIFEST_PARSED, function () {
-        console.log("playing video");
-        video.play();
-      });
+      const player = new Plyr(video, defaultOptions);
+      hls.attachMedia(video);
     } else {
-      console.log("HLS is not supported");
-      // Play from the original video file
+      console.error(
+        'This is an old browser that does not support MSE https://developer.mozilla.org/en-US/docs/Web/API/Media_Source_Extensions_API'
+      );
     }
-  }, [src]);
-  return <video ref={videoRef} controls />;
-};
-export default VideoPlayer;
+  }, [src, videoRef]);
+
+  return (
+    <>
+      <video data-displaymaxtap ref={videoRef} />
+      <style jsx>{`
+        video {
+          max-width: 100%;
+        }
+      `}</style>
+    </>
+  );
+}

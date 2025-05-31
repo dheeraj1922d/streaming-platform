@@ -2,7 +2,7 @@ import express from "express"
 import uploadRouter from "./routers/upload.route.js"
 import cors from "cors"
 import dotenv from "dotenv"
-import kafkaPublisherRouter from "./routes/kafkapublisher.route.js"
+import kafkaPublisherRouter from "./routers/kafkapublisher.route.js"
 
 dotenv.config();
 const port = process.env.PORT || 8080

@@ -13,4 +13,3 @@ const getAllVideos = async (req, res) => {
   }
 };
 export default getAllVideos;
-router.get("/home", getAllVideos);
