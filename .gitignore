@@ -1,3 +1,5 @@
 \node_modules
 \.env
 ca.pem
+public_key.pem
+private_key.pem

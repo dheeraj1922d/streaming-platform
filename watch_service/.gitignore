@@ -3,5 +3,5 @@ node_modules
 .env
 
 /generated/prisma
-\private_key.pem
-\public_key.pem
+watch_service\private_key.pem
+watch_service\public_key.pem
