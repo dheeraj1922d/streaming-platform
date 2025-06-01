@@ -14,6 +14,10 @@ app.use(
 app.use(express.json());
 app.use("/watch", watchRouter);
 
+app.get('/health', (req, res) => {
+    res.status(200).send('Healthy');
+});
+
 app.get("/", (req, res) => {
   res.send("HHLD YouTube Watch Service");
 });

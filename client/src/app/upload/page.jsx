@@ -38,7 +38,7 @@ const UploadForm = () => {
       formData.append("filename", safeFilename);
 
       const initializeRes = await axios.post(
-        "http://localhost:8080/upload/initialize",
+        "http://13.232.49.59:8080/upload/initialize",
         formData,
         {
           headers: {
@@ -65,7 +65,7 @@ const UploadForm = () => {
         chunkFormData.append("uploadId", uploadId);
 
         const uploadPromise = axios.post(
-          "http://localhost:8080/upload",
+          "http://13.232.49.59:8080/upload",
           chunkFormData,
           {
             headers: {
@@ -79,7 +79,7 @@ const UploadForm = () => {
       await Promise.all(uploadPromises);
 
       const completeRes = await axios.post(
-        "http://localhost:8080/upload/complete",
+        "http://13.232.49.59:8080/upload/complete",
         {
           filename: safeFilename,
           totalChunks: totalChunks,

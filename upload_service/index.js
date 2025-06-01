@@ -19,10 +19,13 @@ app.use('/upload', uploadRouter);
 
 app.use('/publish', kafkaPublisherRouter);
 
+app.get('/health', (req, res) => {
+    res.status(200).send('Healthy');
+});
 
 app.get('/', (req, res) => {
     res.send('HHLD YouTube')
- })
+})
  
  
  app.listen(port, () => {

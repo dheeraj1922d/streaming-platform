@@ -15,7 +15,7 @@ const YouTubeHome = () => {
   useEffect(() => {
     const getVideos = async () => {
       try {
-        const res = await axios.get("http://localhost:8082/watch/home");
+        const res = await axios.get("http://3.110.70.72:8082/watch/home");
         setVideos(res.data);
       } catch (error) {
         console.error("Error in fetching videos:", error);
@@ -34,7 +34,7 @@ const YouTubeHome = () => {
     try {
       // Assuming your backend expects a 'key' query param with the video path
       const res = await axios.get(
-        `http://localhost:8082/watch?key=${encodeURIComponent(video.url)}`
+        `http://3.110.70.72:8082/watch?key=${encodeURIComponent(video.url)}`
       );
 
       setSignedUrl(res.data.videoUrl);

@@ -1,7 +1,7 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
-import KafkaConfig from "../upload_service/kafka/kafka.js";
+import KafkaConfig from "./kafka/kafka.js";
 import s3ToS3 from "./hls/s3ToS3.js";
 
 dotenv.config();
@@ -16,6 +16,10 @@ app.use(
 );
 
 app.use(express.json());
+
+app.get('/health', (req, res) => {
+    res.status(200).send('Healthy');
+});
 
 app.get("/", (req, res) => {
   res.send("Transcoder service is working");
