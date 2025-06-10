@@ -1,5 +1,5 @@
 
-# 📺 HHLD Streaming Platform
+# 📺 Streaming Platform
 
 A full-stack, scalable video streaming platform enabling users to upload, transcode, and stream videos via adaptive bitrate streaming (HLS). The platform is modularized into microservices and supports secure upload (OAuth 2.0), Kafka-based communication, and OpenSearch for metadata indexing and retrieval.
 
